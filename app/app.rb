@@ -2,6 +2,7 @@ ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
 require_relative 'models/link.rb'
+# require 'data_mapper_setup'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
@@ -12,15 +13,14 @@ class BookmarkManager < Sinatra::Base
 
   get '/links' do
     @links = Link.all
-    @url = session[:url]
-    @title = session[:title]
     erb :'links/index'
   end
 
   post '/add_links' do
-    session[:url] = params[:url]
-    session[:title] = params[:title]
-    Link.create(url: params[:url], title: params[:title])
+    link = Link.create(url: params[:url], title: params[:title])
+    tag  = Tag.first_or_create(name: params[:tag])
+    link.tags << tag
+    link.save
     redirect '/links'
   end
 
