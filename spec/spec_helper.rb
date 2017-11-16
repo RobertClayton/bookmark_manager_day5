@@ -6,7 +6,7 @@ require 'capybara/rspec'
 require 'rspec'
 require 'sinatra'
 require 'database_cleaner'
-
+require 'rubocop'
 
 Capybara.app = BookmarkManager
 

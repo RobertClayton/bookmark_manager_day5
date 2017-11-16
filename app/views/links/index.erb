@@ -1,7 +1,15 @@
-Want to add a new link?
+
 <form action='/links/new' method='get'>
-  <input type='submit' value="Add link">
+  <input type='submit' value="Add new link">
 </form>
+
+<br>
+
+<form action='/links/filter' method='post'>
+  <input type='text' name="filter" placeholder="Filter tags by:">
+  <input type='submit' value='Filter'>
+</form>
+
 <h1> Links </h1>
 
 <ul id='links'>

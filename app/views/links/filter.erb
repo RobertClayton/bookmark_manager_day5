@@ -1,0 +1,19 @@
+<h1> Filtered Links </h1>
+
+<ul id='filtered_links'>
+  <% @filtered_links.each do |link| %>
+    <li>
+      <b>Title:</b> <%= link.title %>
+    <br>
+      <b>URL:</b>   <%= link.url   %>
+    </li>
+    <br>
+    <br>
+  <% end %>
+</ul>
+
+<br>
+<br>
+<form action='/links' method='get'>
+  <input type='submit' value="Take me back!">
+</form>

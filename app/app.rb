@@ -2,11 +2,9 @@ ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
 require_relative 'models/link.rb'
-# require 'data_mapper_setup'
+require_relative 'data_mapper_setup'
 
 class BookmarkManager < Sinatra::Base
-  enable :sessions
-
   get '/' do
     erb :'root/index'
   end
@@ -28,4 +26,9 @@ class BookmarkManager < Sinatra::Base
     erb :'links/new'
   end
 
+  post '/links/filter' do
+    @filtered_links = []
+    Link.each { |x| @filtered_links << x if x.tags.map(&:name).include? params[:filter] }
+    erb :'links/filter'
+  end
 end
