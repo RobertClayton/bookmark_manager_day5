@@ -137,6 +137,7 @@ DEPENDENCIES
   dm-postgres-adapter
   dm-transactions
   pg
+  rake
   rspec
   rubocop
   selenium-webdriver

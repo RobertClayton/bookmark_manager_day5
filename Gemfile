@@ -5,6 +5,7 @@ gem 'data_mapper'
 gem 'dm-postgres-adapter'
 gem 'dm-transactions'
 gem 'pg'
+gem 'rake'
 gem 'selenium-webdriver'
 gem 'sinatra'
 
