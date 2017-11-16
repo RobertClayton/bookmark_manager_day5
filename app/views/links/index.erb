@@ -10,6 +10,10 @@ Want to add a new link?
       <b>Title:</b> <%= link.title %>
     <br>
       <b>URL:</b>   <%= link.url   %>
+    <br>
+      <b>Tags:</b>   <%= link.tags.map(&:name).each { |x| x }  %>
     </li>
+    <br>
+    <br>
   <% end %>
 </ul>
