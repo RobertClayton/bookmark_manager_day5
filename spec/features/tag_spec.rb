@@ -1,6 +1,5 @@
 feature 'add tags' do
   scenario 'user can tags to links when making a Bookmark' do
-    visit ('/links')
     visit ('/links/new')
     fill_in 'url', with: 'google.co.uk'
     fill_in 'title', with: 'Google'
@@ -12,8 +11,16 @@ feature 'add tags' do
     fill_in 'title', with: 'FB'
     fill_in 'tag', with: 'Social'
     click_on('Submit')
-
     expect(Link.all.tags.map(&:name)).to include('Search','Social')
+  end
+
+  scenario 'user can add multiple tags to a link when making a Bookmark' do
+    visit ('/links/new')
+    fill_in 'url', with: 'youtube.co.uk'
+    fill_in 'title', with: 'Youtube'
+    fill_in 'tag', with: 'Search Video'
+    click_on('Submit')
+    expect(Link.all.tags.map(&:name)).to include('Search','Video')
   end
 
   scenario 'user can filter tag links' do
