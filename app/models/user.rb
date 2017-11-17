@@ -7,6 +7,9 @@ class User
   property :id, Serial
   property :email, String
   property :password_hash, Text
+  attr_accessor :password_confirmation
+
+  validates_confirmation_of :password
 
   def password
     @password ||= Password.new(password_hash)
