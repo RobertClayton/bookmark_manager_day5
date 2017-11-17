@@ -1,16 +1,19 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
-require_relative 'models/link.rb'
+require_relative 'app_helpers'
 require_relative 'data_mapper_setup'
 
 class BookmarkManager < Sinatra::Base
+  enable :sessions
+
   get '/' do
-    erb :'root/index'
+    erb :'root/sign_in'
   end
 
   get '/links' do
     @links = Link.all
+    @user = current_user
     erb :'links/index'
   end
 
@@ -32,9 +35,14 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/links/filter' do
-    @filtered_links = []
-    Link.each { |x| @filtered_links << x if x.tags.map(&:name).include? params[:filter] }
+    @filtered_links = Tag.all(name: params[:filter]).links
     erb :'links/filter'
+  end
+
+  post '/users' do
+    user = User.create(email: params[:email], password: params[:password])
+    session[:user_id] = user.id
+    redirect '/links'
   end
 end
 
