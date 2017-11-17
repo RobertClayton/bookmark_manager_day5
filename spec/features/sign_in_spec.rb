@@ -1,5 +1,3 @@
-#Visits a URL, sees a signup form, enters an email and password and submits the form.
-
 feature 'sign up' do
   scenario 'user can enter email and password, then submit' do
     visit ('/')
@@ -21,6 +19,8 @@ feature 'sign up' do
     click_on('submit')
     expect(User.all.count).to eq(0)
     expect(User.all).to be_empty
+    expect(page.current_url).to include('/user')
+    expect(page).to have_content('Password and confirmation password do not match')
   end
 
 end
