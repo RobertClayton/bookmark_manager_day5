@@ -8,6 +8,7 @@ gem 'pg'
 gem 'rake'
 gem 'selenium-webdriver'
 gem 'sinatra'
+gem 'bcrypt'
 
 group :test do
   gem 'capybara'
