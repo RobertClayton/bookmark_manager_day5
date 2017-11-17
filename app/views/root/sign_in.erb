@@ -1,10 +1,5 @@
-<form action='/users' method='post'>
+<form action='/users/sign_in' method='post'>
   <input type='email' name="email" placeholder="Enter email:">
   <input type='password' name="password" placeholder="Enter password:">
-  <input type='password' name="password_confirmation" placeholder="Confirm password:">
   <input type='submit' value='submit'>
 </form>
-
-<% if flash[:notice] %>
-  <div id='notice'><%= flash[:notice] %></div>
-<% end %>

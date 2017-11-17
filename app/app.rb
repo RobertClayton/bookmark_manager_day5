@@ -11,7 +11,16 @@ class BookmarkManager < Sinatra::Base
   enable :secret_sessions, 'secret'
 
   get '/' do
+    erb :'root/sign_up'
+  end
+
+  get '/users/sign_in' do
     erb :'root/sign_in'
+  end
+
+  post '/users/sign_in' do
+    session[:user_id] = User.first(email: params[:email]).id
+    redirect '/links'
   end
 
   get '/links' do
@@ -48,7 +57,7 @@ class BookmarkManager < Sinatra::Base
 
     unless params[:password_confirmation] == params[:password]
       flash.now[:notice] = "Password and confirmation password do not match"
-      erb :'root/sign_in'
+      erb :'root/sign_up'
     else
       session[:user_id] = user.id
       redirect '/links'
